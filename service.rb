@@ -11,7 +11,7 @@ server.mount_proc '/process' do |req, res|
       data = JSON.parse(req.body)
       if data.is_a?(Array) && data.all? { |i| i.is_a?(Integer) && i.between?(-2**31, 2**31-1) }
         result = data.sum
-        res.body = { result: result }.to_json
+        res.body = result.to_json
       else
         res.status = 400
         res.body = { error: 'Invalid input' }.to_json
